@@ -1,0 +1,68 @@
+diff --git a/build_pynng.py b/build_pynng.py
+index 3215129..513fa5e 100644
+--- a/build_pynng.py
++++ b/build_pynng.py
+@@ -10,9 +10,9 @@ import sys
+ ffibuilder = FFI()
+ 
+ if sys.platform == 'win32':
+-    objects = ['./nng/build/Release/nng.lib']
++    objects = ['./nng/build/nng.lib']
+ 
+-    mbedtls_dir = './mbedtls/build/library/Release'
++    mbedtls_dir = './mbedtls/build/library'
+     objects += [
+         mbedtls_dir + "/mbedtls.lib",
+         mbedtls_dir + "/mbedx509.lib",
+diff --git a/setup.py b/setup.py
+index da0e27c..0b139a8 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1,10 +1,10 @@
+ import os
+-from subprocess import check_call
+ import shutil
+ import sys
++from subprocess import check_call
+ 
+-import setuptools.command.build_py
+ import setuptools.command.build_ext
++import setuptools.command.build_py
+ 
+ # have to exec; can't import the package before it's built.
+ exec(open("pynng/_version.py", encoding="utf-8").read())
+@@ -43,6 +43,8 @@ def build_mbedtls(cmake_args):
+     cwd = 'mbedtls/build'
+     os.mkdir(cwd)
+     cmake_cmd = ['cmake'] + cmake_args
++    if WINDOWS:
++        cmake_cmd += ['-DCMAKE_C_COMPILER=cl', '-DCMAKE_CXX_COMPILER=cl']
+     cmake_cmd += [
+         '-DENABLE_PROGRAMS=OFF',
+         '-DCMAKE_BUILD_TYPE=Release',
+@@ -72,6 +74,8 @@ def build_nng(cmake_args):
+         do('git checkout {}'.format(NNG_REV), shell=True, cwd='nng')
+     os.mkdir('nng/build')
+     cmake_cmd = ['cmake'] + cmake_args
++    if WINDOWS:
++        cmake_cmd += ['-DCMAKE_C_COMPILER=cl', '-DCMAKE_CXX_COMPILER=cl']
+     cmake_cmd += [
+         '-DNNG_ENABLE_TLS=ON',
+         '-DNNG_TESTS=OFF',
+@@ -101,13 +105,14 @@ def build_libs():
+ 
+     flags = ['-DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=true']
+     is_64bit = sys.maxsize > 2**32
+-    if WINDOWS:
++    ninja_paths = shutil.which("ninja")
++    if WINDOWS and not ninja_paths:
+         if is_64bit:
+             flags += ['-A', 'x64']
+         else:
+             flags += ['-A', 'win32']
+ 
+-    if shutil.which('ninja'):
++    if ninja_paths:
+         # the ninja build generator is a million times faster.
+         flags += ['-G', 'Ninja']
+     build_mbedtls(flags)
