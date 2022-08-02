@@ -15,7 +15,7 @@ index 3215129..513fa5e 100644
          mbedtls_dir + "/mbedtls.lib",
          mbedtls_dir + "/mbedx509.lib",
 diff --git a/setup.py b/setup.py
-index da0e27c..0b139a8 100644
+index da0e27c..5c22e5e 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -1,10 +1,10 @@
@@ -31,6 +31,15 @@ index da0e27c..0b139a8 100644
  
  # have to exec; can't import the package before it's built.
  exec(open("pynng/_version.py", encoding="utf-8").read())
+@@ -15,7 +15,7 @@ sys.path.append(THIS_DIR)
+ NNG_REPO = 'https://github.com/nanomsg/nng'
+ NNG_REV = '4f5e11c391c4a8f1b2731aee5ad47bc0c925042a'
+ MBEDTLS_REPO = 'https://github.com/ARMmbed/mbedtls.git'
+-MBEDTLS_REV = '04a049bda1ceca48060b57bc4bcf5203ce591421'
++MBEDTLS_REV = '869298bffeea13b205343361b7a7daf2b210e33d'
+ 
+ WINDOWS = sys.platform == 'win32'
+ 
 @@ -43,6 +43,8 @@ def build_mbedtls(cmake_args):
      cwd = 'mbedtls/build'
      os.mkdir(cwd)
