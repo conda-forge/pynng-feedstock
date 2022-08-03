@@ -1,24 +1,34 @@
-From 2963633f04f7236fda90cba99d43c74dd65e1db3 Mon Sep 17 00:00:00 2001
+From a9d7e6a3bac8fe3f7be02b0db1bc751b18654baf Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Wed, 3 Aug 2022 17:06:41 -0600
+Date: Wed, 3 Aug 2022 16:46:38 -0600
 Subject: [PATCH] Update build_pynng.py
 
 ---
- build_pynng.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ build_pynng.py | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/build_pynng.py b/build_pynng.py
-index 3215129..3f652b8 100644
+index 3215129..b069d18 100644
 --- a/build_pynng.py
 +++ b/build_pynng.py
-@@ -22,8 +22,8 @@
+@@ -7,6 +7,8 @@
+ import os
+ import sys
+ 
++
++conda_prefix = os.environ["PREFIX"]
+ ffibuilder = FFI()
+ 
+ if sys.platform == 'win32':
+@@ -22,8 +24,9 @@
      # system libraries determined to be necessary through trial and error
      libraries = ['Ws2_32', 'Advapi32']
  else:
 -    objects = ['./nng/build/libnng.a', "./mbedtls/prefix/lib/libmbedtls.a",
 -               "./mbedtls/prefix/lib/libmbedx509.a", "./mbedtls/prefix/lib/libmbedcrypto.a"]
-+    objects = ['libnng.a', "libmbedtls.a",
-+               "libmbedx509.a", "libmbedcrypto.a"]
++    objects = ['lib/libnng.a', "lib/libmbedtls.a",
++               "lib/libmbedx509.a", "lib/libmbedcrypto.a"]
++    objects = [os.path.join(conda_prefix, o) for o in objects]
      libraries = ['pthread']
      machine = os.uname().machine
      # this is a pretty heuristic... but let's go with it anyway.
