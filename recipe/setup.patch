@@ -1,0 +1,23 @@
+From a8664f02ea980775b2e13eae1e341c4399bfab44 Mon Sep 17 00:00:00 2001
+From: Jan Janssen <jan-janssen@users.noreply.github.com>
+Date: Wed, 3 Aug 2022 17:29:02 -0600
+Subject: [PATCH] Update setup.py
+
+---
+ setup.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 20cd02d..c8a3cc5 100644
+--- a/setup.py
++++ b/setup.py
+@@ -117,7 +117,8 @@ def build_nng_lib():
+     # dependencies).  Bootstrapping!
+     import build_pynng
+     objs = build_pynng.objects
+-    if objs and all(os.path.exists(p) for p in objs):
++    conda_prefix = os.environ["PREFIX"]
++    if objs and all(os.path.exists(os.path.join(conda_prefix, "lib", p)) for p in objs):
+         # the object file we were planning on building already exists; we'll
+         # just use it!
+         return
