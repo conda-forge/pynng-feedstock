@@ -18,7 +18,7 @@ index 20cd02d..c8a3cc5 100644
 -    if objs and all(os.path.exists(p) for p in objs):
 +    conda_prefix = os.environ["PREFIX"]
 +    print("Debug objects:", objs)
-+    if objs and all(os.path.exists(os.path.join(conda_prefix, "lib", p + ".a")) for p in objs):
++    if objs and all(os.path.exists(os.path.join(conda_prefix, "lib", "lib" + p + ".a")) for p in objs):
          # the object file we were planning on building already exists; we'll
          # just use it!
          return
