@@ -18,7 +18,7 @@ index 3215129..3f652b8 100644
 -    objects = ['./nng/build/libnng.a', "./mbedtls/prefix/lib/libmbedtls.a",
 -               "./mbedtls/prefix/lib/libmbedx509.a", "./mbedtls/prefix/lib/libmbedcrypto.a"]
 +    objects = ['libnng.a', "libmbedtls.a",
-+               "ibmbedx509.a", "ibmbedcrypto.a"]
++               "libmbedx509.a", "ibmbedcrypto.a"]
      libraries = ['pthread']
      machine = os.uname().machine
      # this is a pretty heuristic... but let's go with it anyway.
