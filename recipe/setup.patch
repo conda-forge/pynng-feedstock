@@ -1,0 +1,31 @@
+From 41bcf97260c7f57399eb2aaa7f99c3278608daec Mon Sep 17 00:00:00 2001
+From: Jan Janssen <jan-janssen@users.noreply.github.com>
+Date: Wed, 3 Aug 2022 18:09:22 -0600
+Subject: [PATCH] Update setup.py
+
+---
+ setup.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 20cd02d..a3057b4 100644
+--- a/setup.py
++++ b/setup.py
+@@ -131,7 +131,7 @@ class BuildPyCommand(setuptools.command.build_py.build_py):
+     """Build nng library before anything else."""
+ 
+     def run(self):
+-        build_nng_lib()
++        # build_nng_lib()
+         super(BuildPyCommand, self).run()
+ 
+ 
+@@ -139,7 +139,7 @@ class BuildExtCommand(setuptools.command.build_ext.build_ext):
+     """Build nng library before anything else."""
+ 
+     def run(self):
+-        build_nng_lib()
++        # build_nng_lib()
+         super(BuildExtCommand, self).run()
+ 
+ 

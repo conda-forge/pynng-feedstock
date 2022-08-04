@@ -1,0 +1,34 @@
+From 37ec8d24d15eb1347063de5e83425dbba9559e15 Mon Sep 17 00:00:00 2001
+From: Jan Janssen <jan-janssen@users.noreply.github.com>
+Date: Wed, 3 Aug 2022 18:02:41 -0600
+Subject: [PATCH] Update build_pynng.py
+
+---
+ build_pynng.py | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/build_pynng.py b/build_pynng.py
+index 3215129..d925337 100644
+--- a/build_pynng.py
++++ b/build_pynng.py
+@@ -22,9 +22,8 @@
+     # system libraries determined to be necessary through trial and error
+     libraries = ['Ws2_32', 'Advapi32']
+ else:
+-    objects = ['./nng/build/libnng.a', "./mbedtls/prefix/lib/libmbedtls.a",
+-               "./mbedtls/prefix/lib/libmbedx509.a", "./mbedtls/prefix/lib/libmbedcrypto.a"]
+-    libraries = ['pthread']
++    objects = []
++    libraries = ['pthread', 'nng', 'mbedtls', 'mbedx509', 'mbedcrypto']
+     machine = os.uname().machine
+     # this is a pretty heuristic... but let's go with it anyway.
+     # it would be better to get linker information from cmake somehow.
+@@ -57,7 +56,7 @@
+     libraries=libraries,
+     # library_dirs=['nng/build/Debug',],
+     # (more arguments like setup.py's Extension class:
+-    include_dirs=['nng/include'],
++    include_dirs=[os.path.join(os.environ["PREFIX"], 'include/nng')],
+     extra_objects=objects,
+ )
+ 

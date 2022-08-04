@@ -10,11 +10,12 @@ source:
   sha256: 5edd3ccbeda2264d750d81533a11d45b5efbf8d99da65ba1f4569636f0eb9b70
   patches:
     - fix-windows-builds.patch  # [win]
+    - library.patch  # [unix]
+    - setup.patch  # [unix]
 
 build:
-  number: 3
+  number: 4
   script: {{ PYTHON }} -m pip install . -vv
-  skip: true  # [osx]
 
 requirements:
   build:
@@ -27,10 +28,14 @@ requirements:
     - pip
     - pytest-runner
     - python
+    - nng =1.3  # [unix]
+    - mbedtls  # [unix]
   run:
     - cffi
     - python
     - sniffio
+    - nng =1.3  # [unix]
+    - mbedtls  # [unix]
 
 test:
   imports:
