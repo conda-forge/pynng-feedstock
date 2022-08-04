@@ -28,13 +28,13 @@ requirements:
     - pip
     - pytest-runner
     - python
-    - nng =1.3 # [unix]
+    - nng =1.3  # [unix]
     - mbedtls  # [unix]
   run:
     - cffi
     - python
     - sniffio
-    - nng =1.3 # [unix]
+    - nng =1.3  # [unix]
     - mbedtls  # [unix]
 
 test:
