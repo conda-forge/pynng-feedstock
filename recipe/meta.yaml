@@ -1,5 +1,5 @@
 {% set name = "pynng" %}
-{% set version = "0.7.2" %}
+{% set version = "0.7.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pynng-{{ version }}.tar.gz
-  sha256: a9f86376cdccb6feaa6179e65d684387e86f89440ed6f1b918a4f0502523b83b
+  sha256: 9b8851870520d665b39139836cc07267ac3ce9c1593b2f0a949819a7e0ec7c99
   patches:
     - fix-windows-builds.patch  # [win]
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [osx]
 
