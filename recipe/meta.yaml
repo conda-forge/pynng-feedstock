@@ -20,8 +20,9 @@ requirements:
     - cffi                                   # [build_platform != target_platform]
     - cmake
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - ninja
-    - make  # [unix]
+    - make
   host:
     - cffi
     - pip
