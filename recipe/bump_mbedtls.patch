@@ -1,0 +1,13 @@
+diff --git a/setup.cfg b/setup.cfg
+index f6d7e29..90ca2f2 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -4,7 +4,7 @@ rev=4f5e11c391c4a8f1b2731aee5ad47bc0c925042a
+ 
+ [build_mbedtls]
+ repo=https://github.com/ARMmbed/mbedtls.git
+-rev=04a049bda1ceca48060b57bc4bcf5203ce591421
++rev=edb8fec9882084344a314368ac7fd957a187519c
+ 
+ [build_ext]
+ inplace = 1
