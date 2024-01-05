@@ -24,7 +24,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - ninja
-    - make  # [unix]
+    - make  # [not win]
   host:
     - cffi
     - pip
