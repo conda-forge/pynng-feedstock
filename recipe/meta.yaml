@@ -8,8 +8,6 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pynng-{{ version }}.tar.gz
   sha256: 6e4c8ea80d61d907d005ff29d58a34f7a23b320d4567b869a699f2b6329905e0
-  patches:
-    - fix-windows-builds.patch  # [win]
 
 build:
   number: 0
