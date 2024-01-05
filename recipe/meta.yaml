@@ -10,9 +10,8 @@ source:
   sha256: 6e4c8ea80d61d907d005ff29d58a34f7a23b320d4567b869a699f2b6329905e0
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
-  skip: true  # [osx]
 
 requirements:
   build:
