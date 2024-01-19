@@ -25,21 +25,21 @@ requirements:
     - {{ compiler('cxx') }}
     - ninja
     - make
-    - mbedtls=3.3.0                          # [not win]
-    - nng=1.6.0                              # [not win]
+    - mbedtls =3.3.0                         # [not win]
+    - nng =1.6.0                             # [not win]
   host:
     - cffi
     - pip
     - pytest-runner
     - python
-    - mbedtls=3.3.0                          # [not win]
-    - nng=1.6.0                              # [not win]
+    - mbedtls =3.3.0                         # [not win]
+    - nng =1.6.0                             # [not win]
   run:
     - cffi
     - python
     - sniffio
-    - mbedtls=3.3.0                          # [not win]
-    - nng=1.6.0                              # [not win]
+    - mbedtls =3.3.0                         # [not win]
+    - nng =1.6.0                             # [not win]
 
 
 test:
