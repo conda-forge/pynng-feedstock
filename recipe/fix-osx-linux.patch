@@ -1,5 +1,5 @@
 diff --git a/build_pynng.py b/build_pynng.py
-index 0e04d38..9fec7b9 100644
+index 0e04d38..0d76cf9 100644
 --- a/build_pynng.py
 +++ b/build_pynng.py
 @@ -28,12 +28,16 @@ if sys.platform == "win32":
@@ -24,7 +24,15 @@ index 0e04d38..9fec7b9 100644
      ]
      libraries = ["pthread"]
      machine = os.uname().machine
-@@ -101,4 +105,4 @@ callbacks = """
+@@ -53,6 +57,7 @@ else:
+         or "i386" in machine
+         or "i686" in machine
+         or (clang and "Darwin" in os.uname().sysname)
++        or "arm" in os.environ["CC"]
+     ):
+         libraries.append("atomic")
+ 
+@@ -101,4 +106,4 @@ callbacks = """
  ffibuilder.cdef(api + callbacks)
  
  if __name__ == "__main__":
