@@ -9,7 +9,7 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pynng-{{ version }}.tar.gz
   sha256: 2a921df70e1355fa24829a42c502c2daf766ec5a86ae4633a05995e3af438c28
   patches:
-    - patch-osx-linux.patch   # [not win]
+    - fix-osx-linux.patch   # [not win]
 
 build:
   number: 1
