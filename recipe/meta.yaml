@@ -1,5 +1,5 @@
 {% set name = "pynng" %}
-{% set version = "0.7.4" %}
+{% set version = "0.8.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,9 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pynng-{{ version }}.tar.gz
-  sha256: 6e4c8ea80d61d907d005ff29d58a34f7a23b320d4567b869a699f2b6329905e0
+  sha256: 2a921df70e1355fa24829a42c502c2daf766ec5a86ae4633a05995e3af438c28
+  patches:
+    - fix-osx-arm-builds.patch
 
 build:
   number: 1
@@ -23,15 +25,22 @@ requirements:
     - {{ compiler('cxx') }}
     - ninja
     - make
+    - mbedtls=3.3.0
+    - nng=1.6.0
   host:
     - cffi
     - pip
     - pytest-runner
     - python
+    - mbedtls=3.3.0
+    - nng=1.6.0
   run:
     - cffi
     - python
     - sniffio
+    - mbedtls=3.3.0
+    - nng=1.6.0
+
 
 test:
   imports:
