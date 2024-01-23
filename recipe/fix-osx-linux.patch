@@ -1,5 +1,5 @@
 diff --git a/build_pynng.py b/build_pynng.py
-index 0e04d38..0d76cf9 100644
+index 0e04d38..47ac146 100644
 --- a/build_pynng.py
 +++ b/build_pynng.py
 @@ -28,12 +28,16 @@ if sys.platform == "win32":
@@ -7,7 +7,7 @@ index 0e04d38..0d76cf9 100644
  #    objects = None
  else:
 -    incdirs = ["nng/include"]
-+    PREFIX = os.environ.get("CONDA_PREFIX", "/usr/local")
++    PREFIX = os.environ.get("PREFIX", "/usr/local")
 +    IS_MACOS = sys.platform.startswith('darwin')
 +    DYNAMIC_LIB_EXT = ".dylib" if IS_MACOS else ".so"
 +
@@ -31,10 +31,10 @@ index 0e04d38..0d76cf9 100644
 +        or "arm" in os.environ["CC"]
      ):
          libraries.append("atomic")
- 
+
 @@ -101,4 +106,4 @@ callbacks = """
  ffibuilder.cdef(api + callbacks)
- 
+
  if __name__ == "__main__":
 -    ffibuilder.compile(verbose=True)
 +    ffibuilder.compile(verbose=True)
@@ -45,7 +45,7 @@ index 5de27ad..ea407f5 100644
 +++ b/setup.py
 @@ -178,10 +178,13 @@ with open("README.md", "r", encoding="utf-8") as f:
      long_description = f.read()
- 
+
  setup(
 -    cmdclass={
 -        "build_mbedtls": BuildMbedTls,
