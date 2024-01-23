@@ -1,0 +1,64 @@
+diff --git a/build_pynng.py b/build_pynng.py
+index 0e04d38..0d76cf9 100644
+--- a/build_pynng.py
++++ b/build_pynng.py
+@@ -28,12 +28,16 @@ if sys.platform == "win32":
+ #    libraries = ['pthread' 'mbedtls' 'nng']
+ #    objects = None
+ else:
+-    incdirs = ["nng/include"]
++    PREFIX = os.environ.get("CONDA_PREFIX", "/usr/local")
++    IS_MACOS = sys.platform.startswith('darwin')
++    DYNAMIC_LIB_EXT = ".dylib" if IS_MACOS else ".so"
++
++    incdirs = [
++        os.path.join(PREFIX, "include/nng"),
++    ]
+     objects = [
+-        "./nng/build/libnng.a",
+-        "./mbedtls/prefix/lib/libmbedtls.a",
+-        "./mbedtls/prefix/lib/libmbedx509.a",
+-        "./mbedtls/prefix/lib/libmbedcrypto.a",
++        os.path.join(PREFIX, "lib/libnng" + DYNAMIC_LIB_EXT),
++        os.path.join(PREFIX, "lib/libmbedtls" + DYNAMIC_LIB_EXT),
+     ]
+     libraries = ["pthread"]
+     machine = os.uname().machine
+@@ -53,6 +57,7 @@ else:
+         or "i386" in machine
+         or "i686" in machine
+         or (clang and "Darwin" in os.uname().sysname)
++        or "arm" in os.environ["CC"]
+     ):
+         libraries.append("atomic")
+ 
+@@ -101,4 +106,4 @@ callbacks = """
+ ffibuilder.cdef(api + callbacks)
+ 
+ if __name__ == "__main__":
+-    ffibuilder.compile(verbose=True)
++    ffibuilder.compile(verbose=True)
+\ No newline at end of file
+diff --git a/setup.py b/setup.py
+index 5de27ad..ea407f5 100644
+--- a/setup.py
++++ b/setup.py
+@@ -178,10 +178,13 @@ with open("README.md", "r", encoding="utf-8") as f:
+     long_description = f.read()
+ 
+ setup(
+-    cmdclass={
+-        "build_mbedtls": BuildMbedTls,
+-        "build_nng": BuildNng,
+-        "build_ext": BuildBuild,
+-    },
++    # We do not want to build the vendored dependencies when building the wheel.
++    # In this patch instead, we use the dependencies from conda-forge
++    #
++    # cmdclass={
++    #     "build_mbedtls": BuildMbedTls,
++    #     "build_nng": BuildNng,
++    #     "build_ext": BuildBuild,
++    # },
+     cffi_modules=["build_pynng.py:ffibuilder"],
+ )
