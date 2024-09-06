@@ -12,7 +12,7 @@ source:
     - fix-osx-linux.patch   # [not win]
 
 build:
-  number: 3
+  number: 4
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
