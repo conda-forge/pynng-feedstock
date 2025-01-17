@@ -26,6 +26,7 @@ requirements:
     - {{ stdlib("c") }}
     - ninja
     - make
+    - setuptools
   host:
     - cffi
     - pip
