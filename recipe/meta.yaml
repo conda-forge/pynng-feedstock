@@ -1,5 +1,5 @@
 {% set name = "pynng" %}
-{% set version = "0.8.1" %}
+{% set version = "0.9.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pynng-{{ version }}.tar.gz
-  sha256: 60165f34bdf501885e0acceaeed79bc35a57f3ca3c913cb38c14919b9bd3656f
+  sha256: fcd839abf82a2934fa8c27ff57b574b41810458e35895bac6288814defa8fb4e
   patches:
     - fix-osx-linux.patch   # [not win]
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
