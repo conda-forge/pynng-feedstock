@@ -24,14 +24,6 @@ index 0e04d38..47ac146 100644
      ]
      libraries = ["pthread"]
      machine = os.uname().machine
-@@ -53,6 +57,7 @@ else:
-         or "i386" in machine
-         or "i686" in machine
-         or (clang and "Darwin" in os.uname().sysname)
-+        or "arm" in os.environ["CC"]
-     ):
-         libraries.append("atomic")
-
 @@ -101,4 +106,4 @@ callbacks = """
  ffibuilder.cdef(api + callbacks)
 
