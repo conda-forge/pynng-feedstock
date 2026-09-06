@@ -1,0 +1,80 @@
+schema_version: 1
+
+context:
+  name: pynng
+  version: "0.8.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/pynng-${{ version }}.tar.gz
+  sha256: 60165f34bdf501885e0acceaeed79bc35a57f3ca3c913cb38c14919b9bd3656f
+  patches:
+    - if: not win
+      then: fix-osx-linux.patch
+
+build:
+  number: 3
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - if: build_platform != target_platform
+      then: cffi
+    - cmake
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+    - ninja
+    - make
+    - setuptools
+  host:
+    - cffi
+    - pip
+    - pytest-runner
+    - python
+    - if: not win
+      then: mbedtls =3.3.0
+    - if: not win
+      then: nng =1.6.0
+  run:
+    - cffi
+    - python
+    - sniffio
+    - if: not win
+      then: mbedtls =3.3.0
+    - if: not win
+      then: nng =1.6.0
+
+tests:
+  - python:
+      imports:
+        - pynng
+      pip_check: true
+
+about:
+  license: MIT
+  license_file: LICENSE.txt
+  summary: Python bindings for Nanomsg Next Generation.
+  description: |
+    Ergonomic bindings for nanomsg next generation (nng), in Python. pynng
+    provides a nice interface on top of the full power of nng. nng, and
+    therefore pynng, make it easy to communicate between processes on a
+    single computer or computers across a network. This library is
+    compatible with Python ≥ 3.5. nng is the rewriting of Nanomsg, which
+    is the spiritual successor to ZeroMQ.
+  homepage: https://github.com/codypiersall/pynng
+  repository: https://github.com/codypiersall/pynng
+  documentation: https://pynng.readthedocs.io/
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
+    - carlodri
+    - thomasmarwitz
