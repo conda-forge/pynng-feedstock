@@ -6,13 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pynng-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/pynng-{{ version }}.tar.gz
   sha256: 60165f34bdf501885e0acceaeed79bc35a57f3ca3c913cb38c14919b9bd3656f
   patches:
     - fix-osx-linux.patch   # [not win]
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
