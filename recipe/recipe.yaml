@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: pynng
-  version: "0.8.1"
+  version: "0.9.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,23 +10,22 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/pynng-${{ version }}.tar.gz
-  sha256: 60165f34bdf501885e0acceaeed79bc35a57f3ca3c913cb38c14919b9bd3656f
+  sha256: fcd839abf82a2934fa8c27ff57b574b41810458e35895bac6288814defa8fb4e
   patches:
     - if: not win
       then: fix-osx-linux.patch
 
 build:
-  number: 3
+  number: 0
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
-    - if: build_platform != target_platform
-      then: cffi
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - cffi
     - cmake
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
@@ -40,18 +39,17 @@ requirements:
     - pytest-runner
     - python
     - if: not win
-      then: mbedtls =3.3.0
-    - if: not win
-      then: nng =1.6.0
+      then:
+        - mbedtls =3.3.0
+        - nng =1.6.0
   run:
     - cffi
     - python
     - sniffio
     - if: not win
-      then: mbedtls =3.3.0
-    - if: not win
-      then: nng =1.6.0
-
+      then:
+        - mbedtls =3.3.0
+        - nng =1.6.0
 tests:
   - python:
       imports:
