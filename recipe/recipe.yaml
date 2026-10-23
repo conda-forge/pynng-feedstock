@@ -39,17 +39,17 @@ requirements:
     - pytest-runner
     - python
     - if: not win
-      then:
-        - mbedtls =3.3.0
-        - nng =1.6.0
+      then: 
+        - mbedtls =3.6.3.1
+        - nng =1.11
   run:
     - cffi
     - python
     - sniffio
     - if: not win
       then:
-        - mbedtls =3.3.0
-        - nng =1.6.0
+        - mbedtls =3.6.3.1
+        - nng =1.11
 tests:
   - python:
       imports:
