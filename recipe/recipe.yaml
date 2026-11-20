@@ -16,7 +16,7 @@ source:
       then: fix-osx-linux.patch
 
 build:
-  number: 0
+  number: 1
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -39,7 +39,7 @@ requirements:
     - pytest-runner
     - python
     - if: not win
-      then: 
+      then:
         - mbedtls =3.6.3.1
         - nng =1.11
   run:
