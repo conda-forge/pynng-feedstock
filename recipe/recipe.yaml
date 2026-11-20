@@ -16,7 +16,7 @@ source:
       then: fix-osx-linux.patch
 
 build:
-  number: 1
+  number: 2
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -32,10 +32,10 @@ requirements:
     - ${{ stdlib("c") }}
     - ninja
     - make
-    - setuptools
   host:
     - cffi
     - pip
+    - setuptools
     - pytest-runner
     - python
     - if: not win
